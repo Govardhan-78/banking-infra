@@ -7,7 +7,7 @@ pool:
 steps:
 - task: TerraformInstaller@1
   inputs:
-    terraformVersion: '1.12.2'
+    terraformVersion: '1.5.7'
 
 - task: AzureCLI@2
   inputs:
