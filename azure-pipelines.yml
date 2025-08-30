@@ -1,0 +1,20 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: TerraformInstaller@1
+  inputs:
+    terraformVersion: '1.12.2'
+
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'terraform-connection'   # service connection you created
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      terraform init
+      terraform plan -out=tfplan
+      terraform apply -auto-approve tfplan
