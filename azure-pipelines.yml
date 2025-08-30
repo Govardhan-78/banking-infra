@@ -11,7 +11,7 @@ steps:
 
 - task: AzureCLI@2
   inputs:
-    azureSubscription: 'terraform-connection'   # service connection you created
+    azureSubscription: 'bankinginfraconnection'  
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
