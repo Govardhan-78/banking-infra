@@ -16,12 +16,6 @@ steps:
     scriptType: 'ps'
     scriptLocation: 'inlineScript'
     inlineScript: |
-<<<<<<< HEAD
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: |    
-=======
       echo "Azure CLI login successful"
       az account show
 # Terraform commands
@@ -31,8 +25,6 @@ steps:
     targetType: 'inline'
     script: |
       cd $(System.DefaultWorkingDirectory)/Dev
-      
->>>>>>> ca5c935 (Fix AzureCLI inlineScript in pipeline)
       terraform init
       terraform plan -out=tfplan
       terraform apply -auto-approve tfplan
