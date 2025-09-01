@@ -2,7 +2,7 @@ trigger:
 - main
 
 pool:
-  name: GovardhanPool
+  name: Azure Pipelines
 
 steps:
 - task: TerraformInstaller@1
