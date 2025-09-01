@@ -24,7 +24,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      cd $(System.DefaultWorkingDirectory)/Dev
+      cd $(System.DefaultWorkingDirectory)
       terraform init
       terraform plan -out=tfplan
       terraform apply -auto-approve tfplan
