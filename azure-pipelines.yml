@@ -1,3 +1,41 @@
+# trigger:
+# - main
+
+# pool:
+#   name: Default
+
+# steps:
+# - task: TerraformInstaller@1
+#   inputs:
+#     terraformVersion: '1.5.7'
+
+# - task: AzureCLI@2
+#   displayName: 'Login to Azure'
+#   inputs:
+#     azureSubscription: 'bankinginfra'   # service connection you created
+#     scriptType: 'ps'
+#     scriptLocation: 'inlineScript'
+#     inlineScript: |
+#       echo "Azure CLI login successful"
+#       az account show
+# # Terraform commands
+# - task: PowerShell@2
+#   displayName: 'Run Terraform'
+#   inputs:
+#     targetType: 'inline'
+#     script: |
+#       cd $(System.DefaultWorkingDirectory)
+#       terraform init
+#       terraform plan
+#       terraform apply -auto-approve tfplan
+
+
+
+
+
+
+
+
 trigger:
 - main
 
@@ -5,26 +43,36 @@ pool:
   name: Default
 
 steps:
+# 1️⃣ Install Terraform
 - task: TerraformInstaller@1
+  displayName: 'Install Terraform'
   inputs:
     terraformVersion: '1.5.7'
 
+# 2️⃣ Login to Azure using service connection
 - task: AzureCLI@2
-  displayName: 'Login to Azure'
+  displayName: 'Azure CLI Login'
   inputs:
-    azureSubscription: 'bankinginfra'   # service connection you created
+    azureSubscription: 'bankinginfra'   # your service connection name
     scriptType: 'ps'
     scriptLocation: 'inlineScript'
     inlineScript: |
       echo "Azure CLI login successful"
       az account show
-# Terraform commands
+
+# 3️⃣ Run Terraform commands
 - task: PowerShell@2
   displayName: 'Run Terraform'
   inputs:
     targetType: 'inline'
     script: |
-      cd $(System.DefaultWorkingDirectory)
+      cd $(System.DefaultWorkingDirectory)   # go to repo root
+      echo "Initializing Terraform backend..."
       terraform init
+
+      echo "Planning Terraform changes..."
       terraform plan -out=tfplan
+
+      echo "Applying Terraform changes..."
       terraform apply -auto-approve tfplan
+
