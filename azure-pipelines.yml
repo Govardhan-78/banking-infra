@@ -2,7 +2,7 @@ trigger:
 - main
 
 pool:
-  vmImage: GovardhanPool
+  name: GovardhanPool
 
 steps:
 - task: TerraformInstaller@1
